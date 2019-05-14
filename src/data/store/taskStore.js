@@ -20,10 +20,12 @@ export const taskStore = kea({
   reducers: ({ actions }) => ({
     indexedTasks: [
       {
-        '67dhjksdf78': { title: 'Features for MVP' },
-        '7fgbe89jfdu': { title: 'Launch PPC campaign' },
-        '6chbn40g81s': { title: 'Define audience' },
-        '0vgbrth9q0f': { title: 'Launch landing page' },
+        '67dhjksdf78': { title: 'Multi task list' },
+        '7fgbe89jfdu': { title: 'Connect with backend' },
+        '6chbn40g81s': { title: 'sub tasks' },
+        '0vgbrth9q0f': { title: 'login' },
+        '667hd9vdjs9': { title: 'rename a todo' },
+        '8f7ydughsjb': { title: 'drag and drop' },
       },
       PropTypes.object,
       {
