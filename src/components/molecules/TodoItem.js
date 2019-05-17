@@ -1,15 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { connect } from 'kea';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 //
-import { taskStore } from '../../data/store/taskStore';
-import IconBin from '../../assets/icons/IconBin';
-import { Button } from '../atoms/Button';
+import { TasksStore } from "../../data/state/taskStore";
+import IconBin from "../../assets/icons/IconBin";
+import { Button } from "../atoms/Button/Button";
 
-const connectTodoItem = connect({
-  actions: [taskStore, ['deleteTask', 'toggleTaskCompleted']],
-});
 const TodoItemStyled = styled.div`
   transition: all 0.3s;
   &:hover,
@@ -28,17 +24,18 @@ const TodoItemStyled = styled.div`
   }
 `;
 const LabelStyled = styled.div`
-  color: ${({ completed }) => (completed ? 'lightgray' : 'inherit')};
+  color: ${({ completed }) => (completed ? "lightgray" : "inherit")};
   text-decoration: ${({ completed }) =>
-    completed ? 'line-through' : 'inherit'};
+    completed ? "line-through" : "inherit"};
 `;
 const ButtonStyled = styled(Button)`
   &:focus {
     outline: none;
   }
 `;
-export const TodoItem = connectTodoItem(
-  ({ task, actions: { deleteTask, toggleTaskCompleted }, ...props }) => (
+export const TodoItem = ({ task }) => {
+  let { deleteTask, toggleTaskCompleted } = TasksStore.useContainer();
+  return (
     <TodoItemStyled className="flex flex-row items-baseline mx-3 px-3 py-2 rounded">
       <input
         className="mr-2"
@@ -56,19 +53,19 @@ export const TodoItem = connectTodoItem(
         <IconBin fill="hsl(270,100%,50%)" />
       </ButtonStyled>
     </TodoItemStyled>
-  ),
-);
+  );
+};
 
 TodoItem.propTypes = {
   task: PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
-    completed: PropTypes.bool,
+    completed: PropTypes.bool
   }),
-  actions: PropTypes.objectOf(PropTypes.func),
+  actions: PropTypes.objectOf(PropTypes.func)
 };
 TodoItem.defaultPropTypes = {
   task: {
-    completed: false,
-  },
+    completed: false
+  }
 };

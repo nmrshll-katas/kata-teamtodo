@@ -1,17 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 //
-import { ListView } from '../atoms/ListView';
-import IconList from '../../assets/icons/IconList';
+import { ListView } from "../atoms/ListView";
+import IconList from "../../assets/icons/IconList";
 //
-import { TodosSection } from '../organisms/TodosSection';
+import { TodosSection } from "../organisms/TodosSection";
 
 const SelectableTodoStyled = styled.div`
   background-color: hsl(270, 80%, 94%);
 `;
 const SelectTodoList = () => (
   <ListView
-    data={[{ title: 'Team Todo-list' }]}
+    data={[{ title: "Team Todo-list" }]}
     renderItem={item => (
       <SelectableTodoStyled className="flex flex-row items-center rounded p-2">
         <IconList fill="hsl(270,40%,60%)" className="mr-2" />
