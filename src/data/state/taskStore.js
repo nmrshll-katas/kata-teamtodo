@@ -28,6 +28,11 @@ function useIndexedTasks(
       const localID = randomString();
       setIndexedTasks({ ...indexedTasks, [localID]: { localID, title } });
     },
+    editTask: (id,newTitle) => {
+      const { [id]: task, ...rest } = indexedTasks;
+      task.title = newTitle;
+      setIndexedTasks({ ...rest, [id]: task });
+    },
     deleteTask: id => {
       const { [id]: _dispose_, ...rest } = indexedTasks;
       setIndexedTasks(rest);

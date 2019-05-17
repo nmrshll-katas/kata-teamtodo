@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 //
 import { TasksStore } from "../../data/state/taskStore";
 import IconBin from "../../assets/icons/IconBin";
 import { Button } from "../atoms/Button/Button";
+import { TextInput } from "../atoms/TextInput"
 
 const TodoItemStyled = styled.div`
   transition: all 0.3s;
@@ -34,7 +35,9 @@ const ButtonStyled = styled(Button)`
   }
 `;
 export const TodoItem = ({ task }) => {
-  let { deleteTask, toggleTaskCompleted } = TasksStore.useContainer();
+  let { deleteTask, toggleTaskCompleted, editTask } = TasksStore.useContainer();
+  const [editing, setEditing] = useState(false)
+
   return (
     <TodoItemStyled className="flex flex-row items-baseline mx-3 px-3 py-2 rounded">
       <input
@@ -45,7 +48,14 @@ export const TodoItem = ({ task }) => {
           toggleTaskCompleted(task.id);
         }}
       />
-      <LabelStyled completed={task.completed}>{task.title}</LabelStyled>
+      {editing ?
+        <TextInput
+          className="p-1 rounded outline-none"
+          placeholder={task.title}
+          onSubmit={text => { setEditing(false); editTask(task.id,text) }}
+        /> :
+        <LabelStyled completed={task.completed} onClick={() => setEditing(true)}>{task.title}</LabelStyled>
+      }
       <ButtonStyled
         className="btn-delete ml-auto cursor-pointer"
         onClick={() => deleteTask(task.id)}
