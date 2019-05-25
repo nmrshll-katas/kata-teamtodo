@@ -5,21 +5,8 @@ import { ListView } from "../atoms/ListView";
 import IconList from "../../assets/icons/IconList";
 //
 import { TodosSection } from "../organisms/TodosSection";
-
-const SelectableTodoStyled = styled.div`
-  background-color: hsl(270, 80%, 94%);
-`;
-const SelectTodoList = () => (
-  <ListView
-    data={[{ title: "Team Todo-list" }]}
-    renderItem={item => (
-      <SelectableTodoStyled className="flex flex-row items-center rounded p-2">
-        <IconList fill="hsl(270,40%,60%)" className="mr-2" />
-        <div>{item.title}</div>
-      </SelectableTodoStyled>
-    )}
-  />
-);
+import { SelectTaskList } from "../molecules/SelectTaskList";
+import SelectTaskListStore from "../../data/state/selectTaskListStore";
 
 const AsideStyled = styled.div`
   box-shadow: 1px 0 6px 1px rgba(0, 0, 0, 0.1);
@@ -36,7 +23,7 @@ const App = () => (
           />
           <p className="ml-2 font-semibold">Guglielmo Dogeini</p>
         </div>
-        <SelectTodoList />
+        <SelectTaskList />
       </AsideStyled>
 
       <TodosSection />
