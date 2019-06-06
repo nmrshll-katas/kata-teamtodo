@@ -2,13 +2,18 @@ import { useState } from "react";
 import { schema, normalize, denormalize } from "normalizr";
 import { createContainer } from "unstated-next";
 import { randomString } from "../../utils";
-import { mapObjIndexed, mergeDeepLeft } from "ramda";
+import { mapObjIndexed, mergeDeepLeft, dissocPath } from "ramda";
 
 const identify = obj => ({ id: obj.id || randomString(), ...obj });
 
-export const TaskSchema = new schema.Entity("tasks", {}, {});
 export const TaskListSchema = new schema.Entity("taskLists", {}, {});
+export const TaskSchema = new schema.Entity(
+  "tasks",
+  { taskList: TaskListSchema },
+  {}
+);
 const storeSchema = { tasks: [TaskSchema], taskLists: [TaskListSchema] };
+
 const normToSchema = denormObj =>
   normalize(
     mapObjIndexed(
@@ -17,19 +22,8 @@ const normToSchema = denormObj =>
     ),
     storeSchema
   ).entities;
-// const entities = {
-//   tasks: {
-//     "1": { id: 1, title: "buy cheese" },
-//     "2": { id: 2, title: "more cheese" }
-//   }
-// };
-// const denormalizedData = denormalize({ tasks: [1, 2, 3] }, storeSchema, entities);
-// const denormalizedData = denormalize(
-//   { tasks: Object.keys(entities.tasks) },
-//   storeSchema,
-//   entities
-// );
-// console.log({ NONO: "NONO", denormalizedData });
+
+//
 
 function useIndexedTasks(
   initialState = normToSchema({
@@ -44,32 +38,25 @@ function useIndexedTasks(
   const [indexedStore, setIndexedStore] = useState(initialState);
 
   const mergeNewData = newDenormObj =>
-    setIndexedStore(mergeDeepLeft(indexedStore, normToSchema(newDenormObj)));
+    setIndexedStore(mergeDeepLeft(normToSchema(newDenormObj), indexedStore));
 
-  const saveTask = task => mergeNewData({ tasks: [task].map(identify) });
+  const saveTask = task => {
+    mergeNewData({ tasks: [task].map(identify) });
+  };
 
   const reducers = {
     createTask: title => {
       saveTask({ title });
-
-      // setIndexedStore(normalizedData);
-      // const localID = randomString();
-      // setIndexedStore({ ...indexedStore, [localID]: { localID, title } });
     },
     editTask: (id, newTitle) => {
-      const { [id]: task, ...rest } = indexedStore;
-      task.title = newTitle;
-      setIndexedStore({ ...rest, [id]: task });
+      saveTask({ id, title: newTitle });
     },
     deleteTask: id => {
-      const { [id]: _dispose_, ...rest } = indexedStore;
-      setIndexedStore(rest);
+      setIndexedStore(dissocPath(["tasks", id], indexedStore));
     },
     toggleTaskCompleted: id => {
-      // const { [id]: task, ...rest } = indexedStore;
-      // task.completed = !task.completed;
-      // setIndexedStore({ ...rest, [id]: task });
-      saveTask({ id });
+      const { [id]: task } = indexedStore.tasks;
+      saveTask({ id, completed: !task.completed });
     }
   };
 
