@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 //
-import { TasksStore } from "../../data/state/taskStore";
+import { TasksStore } from "../../data/state2/taskDB";
 import { ListView } from "../atoms/ListView";
 import { TextInput } from "../atoms/TextInput";
 //
@@ -23,6 +23,7 @@ const AddTaskInput = () => {
 
 const ListTodos = ({ filterBy: { completed: completedFilter } }) => {
   let { tasks } = TasksStore.useContainer();
+
   return (
     <ListView
       className="flex flex-col items-stretch bg-white py-2"
@@ -51,11 +52,11 @@ export const TodosSection = () => {
         <p className="text-3xl">Team Todo-list</p>
       </TodosSectionHeaderStyled>
       <div className="overflow-scroll flex flex-col">
-        <TasksStore.Provider>
-          <ListTodos filterBy={{ completed: true }} />
-          <AddTaskInput />
-          <ListTodos filterBy={{ completed: false }} />
-        </TasksStore.Provider>
+        {/* <TasksStore.Provider> */}
+        <ListTodos filterBy={{ completed: true }} />
+        <AddTaskInput />
+        <ListTodos filterBy={{ completed: false }} />
+        {/* </TasksStore.Provider> */}
       </div>
     </TodosSectionStyled>
   );

@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 //
-import { TasksStore } from "../../data/state/taskStore";
+// import { TasksStore } from "../../data/state/taskStore";
+import { TasksStore } from "../../data/state2/taskDB";
 import IconBin from "../../assets/icons/IconBin";
 import { Button } from "../atoms/Button/Button";
-import { TextInput } from "../atoms/TextInput"
+import { TextInput } from "../atoms/TextInput";
 
 const TodoItemStyled = styled.div`
   transition: all 0.3s;
@@ -36,7 +37,7 @@ const ButtonStyled = styled(Button)`
 `;
 export const TodoItem = ({ task }) => {
   let { deleteTask, toggleTaskCompleted, editTask } = TasksStore.useContainer();
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(false);
 
   return (
     <TodoItemStyled className="flex flex-row items-baseline mx-3 px-3 py-2 rounded">
@@ -45,20 +46,29 @@ export const TodoItem = ({ task }) => {
         checked={task.completed || false}
         type="checkbox"
         onChange={() => {
-          toggleTaskCompleted(task.id);
+          // toggleTaskCompleted(task.id);
         }}
       />
-      {editing ?
+      {editing ? (
         <TextInput
           className="p-1 rounded outline-none"
           placeholder={task.title}
-          onSubmit={text => { setEditing(false); editTask(task.id,text) }}
-        /> :
-        <LabelStyled completed={task.completed} onClick={() => setEditing(true)}>{task.title}</LabelStyled>
-      }
+          onSubmit={text => {
+            setEditing(false);
+            editTask(task.id, text);
+          }}
+        />
+      ) : (
+        <LabelStyled
+          completed={task.completed}
+          onClick={() => setEditing(true)}
+        >
+          {task.title}
+        </LabelStyled>
+      )}
       <ButtonStyled
         className="btn-delete ml-auto cursor-pointer"
-        onClick={() => deleteTask(task.id)}
+        // onClick={() => deleteTask(task.id)}
       >
         <IconBin fill="hsl(270,100%,50%)" />
       </ButtonStyled>

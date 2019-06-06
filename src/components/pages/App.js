@@ -7,6 +7,7 @@ import IconList from "../../assets/icons/IconList";
 import { TodosSection } from "../organisms/TodosSection";
 import { SelectTaskList } from "../molecules/SelectTaskList";
 import SelectTaskListStore from "../../data/state/selectTaskListStore";
+//
 
 const AsideStyled = styled.div`
   box-shadow: 1px 0 6px 1px rgba(0, 0, 0, 0.1);
@@ -30,5 +31,12 @@ const App = () => (
     </div>
   </div>
 );
+
+// const App = props => {
+//   let db = useDB();
+//   let queryToGetTaskWithIdOne = queries.getTaskByID(1);
+//   let task = db.executeQuery(queryToGetTaskWithIdOne);
+//   return <div>{task && <span>{task.title}</span>}</div>;
+// };
 
 export default App;
