@@ -52,11 +52,9 @@ export const TodosSection = () => {
         <p className="text-3xl">Team Todo-list</p>
       </TodosSectionHeaderStyled>
       <div className="overflow-scroll flex flex-col">
-        {/* <TasksStore.Provider> */}
         <ListTodos filterBy={{ completed: true }} />
         <AddTaskInput />
         <ListTodos filterBy={{ completed: false }} />
-        {/* </TasksStore.Provider> */}
       </div>
     </TodosSectionStyled>
   );

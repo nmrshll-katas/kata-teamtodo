@@ -32,11 +32,4 @@ const App = () => (
   </div>
 );
 
-// const App = props => {
-//   let db = useDB();
-//   let queryToGetTaskWithIdOne = queries.getTaskByID(1);
-//   let task = db.executeQuery(queryToGetTaskWithIdOne);
-//   return <div>{task && <span>{task.title}</span>}</div>;
-// };
-
 export default App;

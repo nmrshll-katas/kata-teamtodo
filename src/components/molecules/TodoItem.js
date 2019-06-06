@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 //
-// import { TasksStore } from "../../data/state/taskStore";
 import { TasksStore } from "../../data/state2/taskDB";
 import IconBin from "../../assets/icons/IconBin";
 import { Button } from "../atoms/Button/Button";
@@ -46,7 +45,7 @@ export const TodoItem = ({ task }) => {
         checked={task.completed || false}
         type="checkbox"
         onChange={() => {
-          // toggleTaskCompleted(task.id);
+          toggleTaskCompleted(task.id);
         }}
       />
       {editing ? (
@@ -68,7 +67,7 @@ export const TodoItem = ({ task }) => {
       )}
       <ButtonStyled
         className="btn-delete ml-auto cursor-pointer"
-        // onClick={() => deleteTask(task.id)}
+        onClick={() => deleteTask(task.id)}
       >
         <IconBin fill="hsl(270,100%,50%)" />
       </ButtonStyled>
