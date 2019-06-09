@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@types/ramda": "^0.26.9",
         "enzyme": "^3.9.0",
         "enzyme-adapter-react-16": "^1.13.0",
         "normalizr": "^3.3.0",
@@ -39,8 +40,11 @@
         ]
     },
     "devDependencies": {
+        "@types/react": "^16.8.19",
+        "@types/react-dom": "^16.8.4",
         "react-testing-library": "^7.0.0",
-        "tailwindcss": "^1.0.1"
+        "tailwindcss": "^1.0.1",
+        "typescript": "^3.5.1"
     },
     "bit": {
         "env": {},

@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { ListView } from "../atoms/ListView";
 import IconList from "../../assets/icons/IconList";
 //
-import SelectTaskListStore from "../../data/state/selectTaskListStore";
+// import SelectTaskListStore from "../../data/state/selectTaskListStore";
+import { TasksStore } from "../../data/state/taskDB";
 
 const SelectableTaskListStyled = styled.div`
   background-color: hsl(270, 80%, 94%);
@@ -18,8 +19,8 @@ const SelectableTaskList = ({ taskList }) => {
   );
 };
 
-export const _SelectTaskList = () => {
-  let { taskLists } = SelectTaskListStore.useContainer();
+export const SelectTaskList = () => {
+  let { taskLists } = TasksStore.useContainer();
   return (
     <ListView
       data={taskLists}
@@ -28,12 +29,12 @@ export const _SelectTaskList = () => {
   );
 };
 
-export const SelectTaskList = () => {
-  return (
-    <SelectTaskListStore.Provider>
-      <_SelectTaskList />
-    </SelectTaskListStore.Provider>
-  );
-};
+// export const SelectTaskList = () => {
+//   return (
+//     // <SelectTaskListStore.Provider>
+//       <_SelectTaskList />
+//     // </SelectTaskListStore.Provider>
+//   );
+// };
 
 export default SelectTaskList;

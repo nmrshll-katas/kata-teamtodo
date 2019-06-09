@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 //
-import { TasksStore } from "../../data/state2/taskDB";
+import { TasksStore } from "../../data/state/taskDB";
 import IconBin from "../../assets/icons/IconBin";
 import { Button } from "../atoms/Button/Button";
 import { TextInput } from "../atoms/TextInput";

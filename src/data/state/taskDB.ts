@@ -6,6 +6,18 @@ import { mapObjIndexed, mergeDeepLeft, dissocPath } from "ramda";
 
 const identify = obj => ({ id: obj.id || randomString(), ...obj });
 
+export type Task = {
+  id: string;
+  title: string;
+  completed: boolean;
+  taskList: string;
+};
+
+export type TaskList = {
+  id: string;
+  title: string;
+};
+
 export const TaskListSchema = new schema.Entity("taskLists", {}, {});
 export const TaskSchema = new schema.Entity(
   "tasks",
@@ -17,7 +29,7 @@ const storeSchema = { tasks: [TaskSchema], taskLists: [TaskListSchema] };
 const normToSchema = denormObj =>
   normalize(
     mapObjIndexed(
-      (item, key) => (Array.isArray(item) && item.map(identify)) || item, // assign ids
+      (item, key) => (Array.isArray(item) && item.map(identify)) || item, // assign ids for every array type
       denormObj
     ),
     storeSchema
@@ -32,7 +44,11 @@ function useIndexedTasks(
       { title: "more cheese" },
       { title: "even more cheese" }
     ],
-    taskLists: []
+    taskLists: [
+      { id: "1", title: "Team to-do" },
+      { id: "2", title: "another list" },
+      { id: "3", title: "a third list" }
+    ]
   })
 ) {
   const [indexedStore, setIndexedStore] = useState(initialState);
@@ -61,7 +77,10 @@ function useIndexedTasks(
   };
 
   const deindexedStore = denormalize(
-    { tasks: Object.keys(indexedStore.tasks) },
+    {
+      tasks: Object.keys(indexedStore.tasks),
+      taskLists: Object.keys(indexedStore.taskLists)
+    },
     storeSchema,
     indexedStore
   );
