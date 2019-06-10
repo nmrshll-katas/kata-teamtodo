@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 //
 import { TasksStore } from "../../data/state/taskDB";
 import { ListView } from "../atoms/ListView";
 import { TextInput } from "../atoms/TextInput";
+import { ReorderableList } from "../molecules/ReorderableList";
 //
 import { TodoItem } from "../molecules/TodoItem";
 
@@ -30,7 +31,7 @@ const ListTodos = ({ filterBy: { completed: completedFilter } }) => {
       data={tasks.filter(
         t => completedFilter === null || !t.completed !== !completedFilter
       )}
-      renderItem={item => <TodoItem task={item} />}
+      renderItem={(item, key) => <TodoItem task={item} />}
     />
   );
 };
@@ -55,7 +56,10 @@ export const TodosSection = () => {
         <ListTodos filterBy={{ completed: true }} />
         <AddTaskInput />
         <ListTodos filterBy={{ completed: false }} />
+        <ReorderableList />
       </div>
     </TodosSectionStyled>
   );
 };
+
+/////////////////////////

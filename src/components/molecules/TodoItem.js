@@ -9,10 +9,10 @@ import { TextInput } from "../atoms/TextInput";
 
 const TodoItemStyled = styled.div`
   transition: all 0.3s;
-  &:hover,
-  &:focus {
-    transform: scale3d(1.004, 1.004, 1);
-  }
+  // &:hover,
+  // &:focus {
+  //   transform: scale3d(1.004, 1.004, 1);
+  // }
   height: 2.4rem;
   &:hover {
     background-color: hsl(270, 80%, 94%);
@@ -60,7 +60,7 @@ export const TodoItem = ({ task }) => {
       ) : (
         <LabelStyled
           completed={task.completed}
-          onClick={() => setEditing(true)}
+          // onClick={() => setEditing(true)}
         >
           {task.title}
         </LabelStyled>
