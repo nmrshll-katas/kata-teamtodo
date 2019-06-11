@@ -53,13 +53,11 @@ export const TodosSection = () => {
         <p className="text-3xl">Team Todo-list</p>
       </TodosSectionHeaderStyled>
       <div className="overflow-scroll flex flex-col">
+        <ReorderableList />
         <ListTodos filterBy={{ completed: true }} />
         <AddTaskInput />
         <ListTodos filterBy={{ completed: false }} />
-        <ReorderableList />
       </div>
     </TodosSectionStyled>
   );
 };
-
-/////////////////////////
