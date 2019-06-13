@@ -1,12 +1,14 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 //
 import { TasksStore } from "../../data/state/taskDB";
 import { ListView } from "../atoms/ListView";
 import { TextInput } from "../atoms/TextInput";
-import { ReorderableList } from "../molecules/ReorderableList";
 //
 import { TodoItem } from "../molecules/TodoItem";
+//
+import { ReorderableList } from "../molecules/ReorderableList";
+import { WS } from "../molecules/WebSocket";
 
 const AddTaskInput = () => {
   let { createTask } = TasksStore.useContainer();
@@ -54,6 +56,8 @@ export const TodosSection = () => {
       </TodosSectionHeaderStyled>
       <div className="overflow-scroll flex flex-col">
         <ReorderableList />
+        <WS />
+
         <ListTodos filterBy={{ completed: true }} />
         <AddTaskInput />
         <ListTodos filterBy={{ completed: false }} />
