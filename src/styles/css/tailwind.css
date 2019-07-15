@@ -599,8 +599,6 @@ video {
   height: auto;
 }
 
-@tailwind preflight;
-
 .container {
   width: 100%;
 }

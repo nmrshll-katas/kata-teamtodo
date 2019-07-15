@@ -6,7 +6,6 @@ import IconList from "../../assets/icons/IconList";
 //
 import { TodosSection } from "../organisms/TodosSection";
 import { SelectTaskList } from "../molecules/SelectTaskList";
-import SelectTaskListStore from "../../data/state/selectTaskListStore";
 //
 
 const AsideStyled = styled.div`
